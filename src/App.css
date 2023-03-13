@@ -10,6 +10,8 @@
     font-family: 'Montserrat', sans-serif;
     font-family: 'Quattrocento', serif;
     font-family: 'Roboto', sans-serif;
+    color: white;
+    outline-color: white;
 }
 
 a {
@@ -59,4 +61,22 @@ a {
     cursor: pointer;
     text-transform: uppercase;
     color: white;
+}
+
+.textfield{
+    color: white;
+}
+
+.row{
+    background-color:#16171a ;
+    cursor: pointer;
+    font-family: "Montserrat";
+}
+
+.row:hover{
+    background-color: #131111;
+}
+
+.pagination{
+    color: gold;
 }
