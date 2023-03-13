@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Montserrat:wght@300;400;500;600;700;800&family=Quattrocento&family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+
+    font-family: 'Bakbak One', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Quattrocento', serif;
+    font-family: 'Roboto', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+    text-decoration: none;
+    color: gold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.classes {
+    background-color: #14161a;
+    color: white;
+    min-height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.banner{
+   background-image: url('../public/banner2.jpg');
 }
 
-.App-link {
-  color: #61dafb;
+.bannerContent{
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.tagline{
+    display: flex;
+    height: 40%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.carousel{
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.carouselItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: white;
 }

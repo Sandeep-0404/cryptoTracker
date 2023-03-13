@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Montserrat:wght@300;400;500;600;700;800&family=Quattrocento&family=Roboto&display=swap');
 
-*{
+.title{
+    flex: 1;
+    color: gold;
+    font-weight: bold;
     font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
 }
