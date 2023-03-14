@@ -16,21 +16,22 @@ import { Container, createTheme } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import { CoinList } from "../config/api";
 import { CryptoState } from "../CryptoContext";
 
+import "./cointable.css";
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 const CoinsTable = () => {
-    const darkTheme = createTheme({
-        palette: {
-          mode: "dark",
-        },
-      });
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -62,23 +63,19 @@ const CoinsTable = () => {
   const history = useNavigate();
 
   return (
-
-    
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
+    <React.Fragment>
+    <CssBaseline />
       <Container style={{ textAlign: "center" }}>
-        <Typography
-          variant="h4"
-          style={{ margin: 18, fontFamily: "Montserrat" }}
-        >
+        <h4 style={{ margin: 18, fontFamily: "Montserrat", fontSize: 30 }}>
           Cryptocurrency Prices by Market Cap
-        </Typography>
+        </h4>
         <TextField
-        color="primary"
+          id="search"
+          color="primary"
           className="textfield"
           label="Search For a Crypto Currency.."
           variant="outlined"
-          style={{ marginBottom: 20, width: "100%" }}
+          style={{ marginBottom: 20, width: "100%", outlineColor: "white" }}
           onChange={(e) => setSearch(e.target.value)}
         />
 
@@ -147,8 +144,13 @@ const CoinsTable = () => {
                           </div>
                         </TableCell>
                         <TableCell align="right">
-                          {symbol}{" "}
+
+                        <span style={{ color: "white" }}>
+                        {symbol}{" "}
                           {numberWithCommas(row.current_price.toFixed(2))}
+                          </span>
+
+                         
                         </TableCell>
                         <TableCell
                           align="right"
@@ -160,12 +162,13 @@ const CoinsTable = () => {
                           {profit && "+"}
                           {row.price_change_percentage_24h.toFixed(2)}%
                         </TableCell>
-                        <TableCell align="right">
-                          {symbol}{" "}
-                          {numberWithCommas(
-                            row.market_cap.toString().slice(0, -6)
-                          )}
-                          M
+                        <TableCell align="right" color="white">
+                          <span style={{ color: "white" }}>
+                            {symbol}{" "}
+                            {numberWithCommas(
+                              row.market_cap.toString().slice(0, -6)
+                            )}
+                          </span>
                         </TableCell>
                       </TableRow>
                     );
@@ -177,6 +180,8 @@ const CoinsTable = () => {
 
         <Pagination
           count={(handleSearch()?.length / 10).toFixed(0)}
+          color="primary"
+          variant="outlined"
           style={{
             padding: 20,
             width: "100%",
@@ -190,7 +195,7 @@ const CoinsTable = () => {
           }}
         />
       </Container>
-    </ThemeProvider>
+      </React.Fragment>
   );
 };
 

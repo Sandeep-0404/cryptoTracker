@@ -1,0 +1,17 @@
+.containerinfo{
+    color: white;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   margin: 0 auto;
+}
+
+CircularProgress{
+    align-self: center;
+}
+
+.check{
+width: 100%;
+}

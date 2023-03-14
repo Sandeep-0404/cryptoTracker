@@ -20,6 +20,23 @@ const CoinPage = () => {
     setCoin(data);
   };
 
+
+  function extractContent(s, space) {
+    var span= document.createElement('span');
+    span.innerHTML= s;
+    if(space) {
+      var children= span.querySelectorAll('*');
+      for(var i = 0 ; i < children.length ; i++) {
+        if(children[i].textContent)
+          children[i].textContent+= ' ';
+        else
+          children[i].innerText+= ' ';
+      }
+    }
+    return [span.textContent || span.innerText].toString().replace(/ +/g,' ');
+  };
+
+
   useEffect(() => {
     fetchCoin();
   }, []);
@@ -35,56 +52,45 @@ const CoinPage = () => {
           style={{ marginBottom: 20 }}
         />
 
-        <Typography variant="h3" className="heading">
+        <h3 className="heading">
           {coin?.name}
-        </Typography>
-        <Typography variant="subtitle1" className="description">
-          {coin?.description.en.split(". ")[0]}
-        </Typography>
+        </h3>
+
+
+        <p className="description">
+        {extractContent(coin?.description.en.split(". ")[0],true)}
+        </p>
 
         <div className="marketData">
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className="heading">
+            <h5 className="headingSmall">
               Rank:
-            </Typography>
+            </h5>
             &nbsp; &nbsp;
-            <Typography
-              variant="h5"
-              style={{
-                fontFamily: "Montserrat",
-              }}
-            >
+            <h5 className="detailsValue">
               {numberWithCommas(coin?.market_cap_rank)}
-            </Typography>
+            </h5>
           </span>
 
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className="heading">
+            <h5 className="headingSmall">
               Current Price:
-            </Typography>
+            </h5>
             &nbsp; &nbsp;
-            <Typography
-              variant="h5"
-              style={{
-                fontFamily: "Montserrat",
-              }}
+            <h5 className="detailsValue"
             >
               {symbol}{" "}
               {numberWithCommas(
                 coin?.market_data.current_price[currency.toLowerCase()]
               )}
-            </Typography>
+            </h5>
           </span>
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className="heading">
+            <h5 className="headingSmall">
               Market Cap:
-            </Typography>
+            </h5>
             &nbsp; &nbsp;
-            <Typography
-              variant="h5"
-              style={{
-                fontFamily: "Montserrat",
-              }}
+            <h5 className="detailsValue"
             >
               {symbol}{" "}
               {numberWithCommas(
@@ -93,7 +99,7 @@ const CoinPage = () => {
                   .slice(0, -6)
               )}
               M
-            </Typography>
+            </h5>
           </span>
         </div>
       </div>

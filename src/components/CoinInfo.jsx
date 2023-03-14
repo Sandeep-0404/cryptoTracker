@@ -1,19 +1,20 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { CryptoState } from '../CryptoContext';
-import { HistoricalChart } from '../config/api';
-import { ThemeProvider } from 'styled-components';
-import { CircularProgress, createTheme, CssBaseline } from '@mui/material';
-import { Line } from 'react-chartjs-2';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { CryptoState } from "../CryptoContext";
+import { HistoricalChart } from "../config/api";
+import { ThemeProvider } from "styled-components";
+import { CircularProgress, createTheme, CssBaseline } from "@mui/material";
+import { Line } from "react-chartjs-2";
 import { chartDays } from "../config/data";
-import SelectButton from './SelectButton';
-import Chart from 'chart.js/auto';
+import SelectButton from "./SelectButton";
+import Chart from "chart.js/auto";
+import './coininfo.css'
 
-const CoinInfo = ({coin}) => {
+const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
   const [days, setDays] = useState(1);
   const { currency } = CryptoState();
-  const [flag,setflag] = useState(false);
+  const [flag, setflag] = useState(false);
 
   const fetchHistoricData = async () => {
     const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
@@ -24,8 +25,7 @@ const CoinInfo = ({coin}) => {
   useEffect(() => {
     fetchHistoricData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [days,currency]);
-
+  }, [days, currency]);
 
   console.log(coin);
 
@@ -40,17 +40,20 @@ const CoinInfo = ({coin}) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-    <CssBaseline/>
-      <div className="container">
-        {!historicData | flag===false ? (
+      <CssBaseline />
+      <div className="containerinfo">
+        {!historicData | (flag === false) ? (
           <CircularProgress
             style={{ color: "gold" }}
-            size={250}
+            size={200}
             thickness={1}
           />
         ) : (
           <>
-            <Line
+          <div className="check"
+          >
+            <Line 
+           
               data={{
                 labels: historicData.map((coin) => {
                   let date = new Date(coin[0]);
@@ -72,23 +75,27 @@ const CoinInfo = ({coin}) => {
               options={{
                 elements: {
                   point: {
-                    radius: 1,
+                    radius: 0.1,
                   },
                 },
               }}
             />
+            </div>
             <div
+            className=""
               style={{
                 display: "flex",
-                marginTop: 20,
+                marginTop: 40,
                 justifyContent: "space-around",
                 width: "100%",
+
               }}
             >
               {chartDays.map((day) => (
                 <SelectButton
                   key={day.value}
-                  onClick={() => {setDays(day.value);
+                  onClick={() => {
+                    setDays(day.value);
                     setflag(false);
                   }}
                   selected={day.value === days}
@@ -101,7 +108,7 @@ const CoinInfo = ({coin}) => {
         )}
       </div>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default CoinInfo
+export default CoinInfo;
